@@ -1,22 +1,13 @@
-def rearrange(user_str):
-    list_of_words = user_str.split()
-    d = {}
-    for word in list_of_words:
-        num = 0
-        digit = [int(ch) for ch in word if (ord(ch)>47) and (ord(ch)<58)]
-        for i in range(len(digit)):
-            num = num * 10 + digit[i]
-
-        d[num] = word.replace(str(num), '')
-
-    list_k = list(d.keys())
-    list_k.sort()
-    res_str = ''
-    for i in list_k:
-        res_str += d[i] + ' '
-
-    return res_str[:-1]
+def does_brick_fit(br_h, br_w, br_d, h, w):
+    brick = [br_h, br_w, br_d]
+    hole = [h, w]
+    brick.remove(max(brick))
+    return min(brick) <= min(hole) and max(brick) <= max(hole)
 
 
-input_str = input('input string: ')
-print(rearrange(input_str))
+brick_h = int(input('brick height: '))
+brick_w = int(input('brick width: '))
+brick_d = int(input('brick depth: '))
+h = int(input('hole height: '))
+w = int(input('hole width: '))
+print(does_brick_fit(brick_h, brick_w, brick_d, h, w))
